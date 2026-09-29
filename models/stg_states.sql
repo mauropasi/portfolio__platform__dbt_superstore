@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ ref('raw_states') }}
+    select * from {{ source('raw', 'raw_states') }}
 ),
 
 transformed as (

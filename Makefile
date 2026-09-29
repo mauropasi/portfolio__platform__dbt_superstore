@@ -1,4 +1,4 @@
-.PHONY: help build lint test seed run docs
+.PHONY: help build lint test run docs
 
 help: ## Show available commands
 	@echo "Available commands:"
@@ -7,16 +7,13 @@ help: ## Show available commands
 lint: ## Run sqlfluff linting across models
 	sqlfluff lint models/
 
-seed: ## Load raw seed CSVs into local DuckDB
-	dbt seed
-
 run: ## Execute dbt run
 	dbt run
 
 test: ## Run dbt data quality tests
 	dbt test
 
-build: lint ## Full local build cycle: lint -> seed -> run -> test
+build: lint ## Full local build cycle: lint -> run -> test
 	dbt build
 
 docs: ## Generate and serve dbt interactive documentation

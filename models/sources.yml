@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: raw
+    description: "Raw operational source data ingested and exposed by the platform runtime."
+    tables:
+      - name: raw_users
+        description: "Raw customer registration events."
+        columns:
+          - name: id
+            description: "Primary key for user."
+          - name: email
+            description: "User contact email."
+
+      - name: raw_orders
+        description: "Raw order transaction logs."
+        columns:
+          - name: order_id
+            description: "Primary key for order."
+          - name: customer_id
+            description: "Foreign key to raw_users.id."
+
+      - name: raw_states
+        description: "Lookup data for US states."
+        columns:
+          - name: state_code
+            description: "Two-letter state abbreviation."
