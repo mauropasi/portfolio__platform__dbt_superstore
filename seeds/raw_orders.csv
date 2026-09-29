@@ -1,0 +1,9 @@
+id,user_id,order_date,status,amount
+101,1,2024-01-20,completed,49.99
+102,1,2024-02-14,completed,129.50
+103,2,2024-02-18,completed,35.00
+104,2,2024-03-01,returned,89.00
+105,3,2024-03-15,pending,150.25
+106,3,2024-03-20,completed,75.00
+107,1,2024-04-02,cancelled,20.00
+108,2,2024-04-10,completed,199.99

@@ -1,0 +1,56 @@
+version: 2
+
+seeds:
+  - name: raw_orders
+    description: "Seed table containing raw order mock data."
+    columns:
+      - name: id
+        description: "Primary key for the order."
+        tests:
+          - unique
+          - not_null
+      - name: user_id
+        description: "ID of the user who placed the order."
+        tests:
+          - not_null
+      - name: order_date
+        description: "Date when the order was placed."
+        tests:
+          - not_null
+      - name: status
+        description: "Order fulfillment status."
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['completed', 'pending', 'returned', 'cancelled']
+      - name: amount
+        description: "Total order amount in USD."
+        tests:
+          - not_null
+
+  - name: raw_states
+    description: "Seed table containing US state reference data."
+    columns:
+      - name: state_code
+        description: "Two-letter postal abbreviation (primary key)."
+        tests:
+          - unique
+          - not_null
+      - name: state_name
+        description: "Full name of the state."
+        tests:
+          - unique
+          - not_null
+      - name: population
+        description: "Estimated state population (2020 Census)."
+        tests:
+          - not_null
+      - name: num_counties
+        description: "Number of counties (or county-equivalents) in the state."
+        tests:
+          - not_null
+      - name: founded_year
+        description: "Year the state was admitted to the Union."
+        tests:
+          - not_null

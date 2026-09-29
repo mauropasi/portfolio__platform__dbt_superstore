@@ -1,0 +1,27 @@
+{
+  "name": "ecommerce-dbt-analytics",
+  // In real deployment, this pulls the published platform image:
+  // "image": "ghcr.io/<your-github-username>/dbt-platform-runtime:1",
+  "image": "dbt-platform-runtime:local",
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "DBT_TYPE": "duckdb",
+    "DBT_DUCKDB_PATH": "dev.duckdb"
+  },
+  "postCreateCommand": "mkdir -p ~/.dbt && echo 'default:\n  target: local\n  outputs:\n    local:\n      type: duckdb\n      path: dev.duckdb\n      threads: 4' > ~/.dbt/profiles.yml",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "dbt.profilesDir": "/home/vscode/.dbt"
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "innoverio.vscode-dbt-power-user",
+        "Dorotiy.sqlfluff"
+      ]
+    }
+  },
+  "forwardPorts": [8080]
+}
