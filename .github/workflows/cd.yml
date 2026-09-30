@@ -9,8 +9,7 @@ jobs:
   deploy-and-publish:
     runs-on: ubuntu-latest
     container:
-      # Runs in the immutable pre-baked platform runtime
-      image: ghcr.io/${{ github.repository_owner }}/dbt-platform-runtime:1
+      image: ghcr.io/${{ github.repository_owner }}/portfolio__platform__dbt_runtime:main
 
     steps:
       - name: Checkout repository

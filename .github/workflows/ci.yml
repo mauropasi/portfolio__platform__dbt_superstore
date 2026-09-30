@@ -8,6 +8,4 @@ on:
 jobs:
   # Calls the central, immutable CI pipeline from the platform runtime repo
   run-platform-ci:
-    uses: ./.github/workflows/ci-runner.yml
-    # When deployed to real GitHub repos, this line becomes:
-    # uses: <your-github-username>/dbt-platform-runtime/.github/workflows/reusable-dbt-ci.yml@v1
+    uses: mauropasi/portfolio__platform__dbt_runtime/.github/workflows/reusable-dbt-ci.yml@main
