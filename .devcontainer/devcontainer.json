@@ -6,10 +6,8 @@
   ],
   "remoteUser": "vscode",
   "containerEnv": {
-    "DBT_TYPE": "duckdb",
-    "DBT_DUCKDB_PATH": "dev.duckdb"
+    "DBT_TYPE": "duckdb"
   },
-  "postCreateCommand": "mkdir -p ~/.dbt && echo 'default:\n  target: local\n  outputs:\n    local:\n      type: duckdb\n      path: dev.duckdb\n      threads: 4' > ~/.dbt/profiles.yml",
   "customizations": {
     "vscode": {
       "settings": {

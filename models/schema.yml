@@ -1,45 +1,52 @@
 version: 2
 
 models:
-  - name: stg_users
-    description: "Staging model for raw user seed data."
+  - name: stg_orders
+    description: "Staging model cleaning and standardizing raw Superstore order lines."
     columns:
-      - name: user_id
-        description: "Primary key for user."
-        tests:
+      - name: row_id
+        description: "Primary key: unique row identifier."
+        data_tests:
           - unique
           - not_null
-      - name: user_name
-        description: "Uppercased name of the user."
-        tests:
+      - name: order_id
+        description: "Transaction order identifier."
+        data_tests:
+          - not_null
+      - name: order_date
+        description: "Date the order was placed."
+        data_tests:
+          - not_null
+      - name: sales_amount
+        description: "Gross revenue of the line item."
+        data_tests:
+          - not_null
+      - name: quantity
+        description: "Quantity of items ordered."
+        data_tests:
           - not_null
 
-  - name: stg_states
-    description: "Staging model for US state seed data."
+  - name: stg_returns
+    description: "Staging model identifying returned orders."
     columns:
-      - name: state_code
-        description: "Two-letter postal abbreviation (primary key)."
-        tests:
+      - name: order_id
+        description: "Identifier of the returned order."
+        data_tests:
+          - not_null
+      - name: is_returned
+        description: "Boolean flag indicating whether the order was returned."
+        data_tests:
+          - not_null
+
+  - name: stg_people
+    description: "Staging model mapping sales regions to regional managers."
+    columns:
+      - name: region
+        description: "Geographic sales region."
+        data_tests:
           - unique
           - not_null
-      - name: state_name
-        description: "Uppercased full name of the state."
-        tests:
-          - unique
-          - not_null
-      - name: population
-        description: "Estimated state population (2020 Census)."
-        tests:
-          - not_null
-      - name: num_counties
-        description: "Number of counties or county-equivalents."
-        tests:
-          - not_null
-      - name: founded_year
-        description: "Year the state was admitted to the Union."
-        tests:
-          - not_null
-      - name: years_since_statehood
-        description: "Number of years since the state was founded (as of 2024)."
-        tests:
+      - name: regional_manager
+        description: "Name of the assigned regional manager."
+        data_tests:
           - not_null

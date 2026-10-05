@@ -6,50 +6,6 @@ on:
       - main
 
 jobs:
-  deploy-and-publish:
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/${{ github.repository_owner }}/portfolio__platform__dbt_runtime:main
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      # -------------------------------------------------------------
-      # 1. Inject Production 12-Factor Profile
-      # -------------------------------------------------------------
-      - name: Inject Production Profile
-        run: |
-          mkdir -p /home/vscode/.dbt
-          cat <<EOF > /home/vscode/.dbt/profiles.yml
-          default:
-            target: prod
-            outputs:
-              prod:
-                type: duckdb
-                path: prod.duckdb
-                schema: "analytics_prod"
-                threads: 4
-          EOF
-
-      # -------------------------------------------------------------
-      # 2. Production Execution & Materialization
-      # -------------------------------------------------------------
-      - name: Run Production dbt Build
-        run: |
-          echo "==> Deploying models to production warehouse..."
-          dbt build --target prod
-
-      # -------------------------------------------------------------
-      # 3. Generate and Publish Documentation Artifacts
-      # -------------------------------------------------------------
-      - name: Generate dbt Documentation
-        run: |
-          echo "==> Generating dbt catalog and documentation..."
-          dbt docs generate --target prod
-
-      - name: Upload dbt Documentation Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: dbt-docs
-          path: target/
+  # Calls the central, immutable CD pipeline from the platform runtime repo
+  run-platform-cd:
+    uses: mauropasi/portfolio__platform__dbt_runtime/.github/workflows/reusable-dbt-cd.yml@main
